@@ -1,0 +1,1756 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Selected Work â€” Ajay Alexander. Product design case studies across fintech, enterprise, and digital platforms.">
+<meta name="theme-color" content="#040404">
+<meta property="og:title" content="Work â€” Ajay Alexander">
+<meta property="og:description" content="Product design case studies. Strategy, systems, and craft.">
+<meta property="og:type" content="website">
+<title>Work â€” Ajay Alexander</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS â€” identical to portfolio-v2 / about
+   ============================================================ */
+:root {
+  --black:        #040404;
+  --deep:         #070707;
+  --coal:         #0c0c0c;
+  --surface:      #121212;
+  --surface-2:    #181818;
+  --border:       rgba(255,255,255,0.07);
+  --border-hover: rgba(201,169,110,0.25);
+  --white:        #f0ede8;
+  --white-dim:    rgba(240,237,232,0.72);
+  --off:          #6e6b66;
+  --dim:          #333030;
+  --gold:         #c9a96e;
+  --gold-light:   #e8d5b0;
+  --gold-dim:     rgba(201,169,110,0.12);
+  --gutter:       clamp(20px,5vw,72px);
+  --max-w:        1440px;
+  --text-xs:      clamp(9px,0.7vw,11px);
+  --text-sm:      clamp(12px,1vw,14px);
+  --text-base:    clamp(15px,1.2vw,18px);
+  --text-lg:      clamp(18px,1.6vw,22px);
+  --text-xl:      clamp(22px,2vw,28px);
+  --text-2xl:     clamp(32px,3.5vw,48px);
+  --text-3xl:     clamp(48px,5.5vw,80px);
+  --text-4xl:     clamp(64px,8vw,120px);
+  --text-hero:    clamp(64px,9vw,140px);
+  --sp-xl:        clamp(80px,10vw,140px);
+  --ease-out:     cubic-bezier(0.16,1,0.3,1);
+  --ease-in-out:  cubic-bezier(0.45,0,0.55,1);
+  --dur-fast:     220ms;
+  --dur-mid:      480ms;
+  --dur-slow:     800ms;
+}
+
+/* â”€â”€ RESET â”€â”€ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--black);color:var(--white);
+  font-family:'Syne',sans-serif;font-size:var(--text-base);
+  line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{background:none;border:none;cursor:pointer;font:inherit;color:inherit}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* â”€â”€ GRAIN â”€â”€ */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.028;pointer-events:none;z-index:9000;
+}
+
+/* â”€â”€ CONTAINER â”€â”€ */
+.container{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter)}
+
+/* â”€â”€ TYPE UTILS â”€â”€ */
+.label{
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.25em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:12px;
+}
+.label::before{content:attr(data-num);color:var(--dim)}
+.display{font-family:'Bebas Neue',cursive;line-height:.9;letter-spacing:.01em;color:var(--white)}
+.display em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:var(--gold)}
+.body-text{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.7;color:var(--off)}
+.body-text strong{color:var(--white-dim);font-weight:400}
+.mono{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.15em;text-transform:uppercase;color:var(--off)}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  padding:clamp(20px,2.5vw,32px) var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:padding var(--dur-mid) var(--ease-out),
+             background var(--dur-mid) var(--ease-out),
+             border-color var(--dur-mid) var(--ease-out);
+  border-bottom:1px solid transparent;
+}
+#site-nav.scrolled{
+  padding:clamp(14px,1.5vw,20px) var(--gutter);
+  background:rgba(3,3,10,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom-color:var(--border);
+}
+.nav-logo{
+  font-family:'Bebas Neue',cursive;font-size:clamp(18px,2vw,24px);
+  letter-spacing:.2em;color:var(--white);animation:fadeIn .6s .1s both;
+}
+.nav-desktop{display:flex;align-items:center;gap:clamp(32px,4vw,56px)}
+.nav-links-list{display:flex;gap:clamp(24px,3vw,48px)}
+.nav-links-list a{
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.18em;text-transform:uppercase;color:var(--off);
+  transition:color var(--dur-fast);position:relative;padding-bottom:2px;
+}
+.nav-links-list a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--gold);
+  transition:width var(--dur-mid) var(--ease-out);
+}
+.nav-links-list a:hover,.nav-links-list a:focus-visible{color:var(--white)}
+.nav-links-list a:hover::after,.nav-links-list a:focus-visible::after{width:100%}
+.nav-links-list a.active{color:var(--gold)}
+.nav-links-list a.active::after{width:100%}
+.nav-cta-btn{
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--black);background:var(--gold);padding:11px 26px;
+  transition:background var(--dur-fast),transform var(--dur-fast);
+  animation:fadeIn .6s .3s both;
+}
+.nav-cta-btn:hover{background:var(--gold-light);transform:translateY(-1px)}
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;padding:8px;z-index:820;
+  animation:fadeIn .6s .2s both;
+}
+.nav-hamburger span{
+  display:block;height:1.5px;background:var(--white);border-radius:2px;
+  transform-origin:center;
+  transition:transform var(--dur-mid) var(--ease-out),
+             opacity var(--dur-mid) var(--ease-out),
+             width var(--dur-mid) var(--ease-out);
+}
+.nav-hamburger span:nth-child(1){width:24px}
+.nav-hamburger span:nth-child(2){width:18px}
+.nav-hamburger span:nth-child(3){width:24px}
+.nav-hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg);width:24px}
+.nav-hamburger[aria-expanded="true"] span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);width:24px}
+#mobile-nav{
+  position:fixed;inset:0;z-index:810;background:var(--black);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:clamp(80px,14vw,120px) var(--gutter) clamp(48px,8vw,72px);
+  opacity:0;pointer-events:none;transform:translateY(-12px);
+  transition:opacity var(--dur-mid) var(--ease-out),transform var(--dur-mid) var(--ease-out);
+}
+#mobile-nav.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.mobile-nav-links{display:flex;flex-direction:column;gap:4px;margin-bottom:52px}
+.mobile-nav-links a{
+  font-family:'Bebas Neue',cursive;font-size:clamp(52px,13vw,80px);
+  line-height:1.05;color:var(--dim);
+  transition:color var(--dur-mid) var(--ease-out),transform var(--dur-mid) var(--ease-out),opacity var(--dur-mid) var(--ease-out);
+  transform:translateX(-20px);opacity:0;
+}
+#mobile-nav.open .mobile-nav-links a{transform:translateX(0);opacity:1}
+#mobile-nav.open .mobile-nav-links a:nth-child(1){transition-delay:.08s}
+#mobile-nav.open .mobile-nav-links a:nth-child(2){transition-delay:.14s}
+#mobile-nav.open .mobile-nav-links a:nth-child(3){transition-delay:.20s}
+#mobile-nav.open .mobile-nav-links a:nth-child(4){transition-delay:.26s}
+.mobile-nav-links a:hover{color:var(--white)}
+.mobile-nav-bottom{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-top:1px solid var(--border);padding-top:32px;
+  opacity:0;transition:opacity var(--dur-slow) .3s;
+}
+#mobile-nav.open .mobile-nav-bottom{opacity:1}
+.mobile-nav-social{display:flex;gap:24px}
+.mobile-nav-social a{
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.15em;color:var(--off);text-transform:uppercase;
+  transition:color var(--dur-fast);
+}
+.mobile-nav-social a:hover{color:var(--gold)}
+.mobile-nav-email{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:var(--text-base);color:var(--off)}
+body.nav-open{overflow:hidden}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.sr{opacity:0;transform:translateY(36px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.sr.visible{opacity:1;transform:translateY(0)}
+.sr-left{opacity:0;transform:translateX(-36px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.sr-left.visible{opacity:1;transform:translateX(0)}
+.sr-right{opacity:0;transform:translateX(36px);transition:opacity var(--dur-slow) var(--ease-out),transform var(--dur-slow) var(--ease-out)}
+.sr-right.visible{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.05s!important}.d2{transition-delay:.12s!important}
+.d3{transition-delay:.19s!important}.d4{transition-delay:.26s!important}
+.d5{transition-delay:.33s!important}.d6{transition-delay:.40s!important}
+
+/* ============================================================
+   SECTION 1 â€” WORK HERO
+   ============================================================ */
+#work-hero{
+  position:relative;min-height:72vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:clamp(100px,14vh,140px);
+  overflow:hidden;border-bottom:1px solid var(--border);
+}
+.work-hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 65% 55% at 75% 35%, rgba(201,169,110,.055) 0%, transparent 55%),
+    linear-gradient(175deg,var(--black) 0%,#04030100 100%);
+}
+.work-hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 80% 70% at 65% 40%,black,transparent 65%);
+}
+.work-hero-count{
+  position:absolute;right:-1vw;top:50%;transform:translateY(-50%);
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(160px,24vw,380px);
+  color:rgba(255,255,255,.016);letter-spacing:-.05em;line-height:1;
+  pointer-events:none;user-select:none;
+}
+.work-hero-inner{position:relative;z-index:2;padding-bottom:clamp(52px,7vh,88px)}
+.work-breadcrumb{
+  display:flex;align-items:center;gap:12px;
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+  margin-bottom:clamp(24px,3vh,40px);animation:slideUp .7s .3s both;
+}
+.work-breadcrumb a{color:var(--off);transition:color var(--dur-fast)}
+.work-breadcrumb a:hover{color:var(--gold)}
+.work-hero-h1{
+  font-family:'Bebas Neue',cursive;font-size:var(--text-hero);
+  line-height:.88;color:var(--white);animation:slideUp .8s .45s both;
+}
+.work-hero-h1 em{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:300;font-size:.78em;color:var(--gold);display:block;
+}
+.work-hero-foot{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:clamp(20px,3vw,36px);
+  padding-top:clamp(32px,4vh,52px);border-top:1px solid var(--border);
+  animation:fadeIn .8s .8s both;
+}
+.work-hero-desc{
+  font-family:'Cormorant Garamond',serif;font-size:var(--text-lg);
+  font-weight:300;line-height:1.65;color:var(--off);max-width:440px;
+}
+.work-hero-stats{display:flex;gap:clamp(28px,4vw,56px)}
+.whs{display:flex;flex-direction:column;gap:4px}
+.whs-val{
+  font-family:'Bebas Neue',cursive;font-size:clamp(28px,3vw,44px);
+  line-height:1;color:var(--white);
+}
+.whs-val span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.7em;color:var(--gold)}
+.whs-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+
+/* Filter bar */
+.filter-bar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:clamp(20px,2.5vw,32px) 0;
+  border-bottom:1px solid var(--border);
+  background:var(--coal);
+}
+.filter-bar .container{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.filter-label{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-right:8px}
+.filter-btn{
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--off);border:1px solid var(--border);
+  padding:8px 18px;background:none;cursor:pointer;
+  transition:color var(--dur-fast),border-color var(--dur-fast),background var(--dur-fast);
+}
+.filter-btn:hover,.filter-btn.active{color:var(--gold);border-color:var(--border-hover);background:var(--gold-dim)}
+
+/* ============================================================
+   SECTION 2 â€” FEATURED PROJECTS (alternating split)
+   ============================================================ */
+#featured-projects{padding:var(--sp-xl) 0;background:var(--black)}
+.fp-header{margin-bottom:clamp(60px,8vw,100px)}
+.fp-header .label{margin-bottom:20px}
+.fp-header .display{font-size:clamp(52px,7vw,110px)}
+
+.projects-stack{display:flex;flex-direction:column;gap:2px}
+
+.proj-block{
+  position:relative;overflow:hidden;
+  border:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:520px;
+  transition:border-color var(--dur-mid) var(--ease-out);
+}
+.proj-block:hover{border-color:var(--border-hover)}
+.proj-block.reverse{direction:rtl}
+.proj-block.reverse>*{direction:ltr}
+
+/* Thumb side */
+.proj-thumb{
+  position:relative;overflow:hidden;background:var(--surface);
+}
+.proj-thumb-inner{
+  position:absolute;inset:0;
+  transition:transform var(--dur-slow) var(--ease-out);
+  display:flex;align-items:center;justify-content:center;
+}
+.proj-block:hover .proj-thumb-inner{transform:scale(1.04)}
+.proj-thumb-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.proj-thumb-art svg{width:100%;height:100%}
+.proj-thumb-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,0,0,.2),transparent 60%);
+  pointer-events:none;
+}
+
+/* Info side */
+.proj-info{
+  padding:clamp(40px,5vw,72px) clamp(32px,4.5vw,64px);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;
+}
+.proj-info::before{
+  content:'';position:absolute;left:0;top:clamp(40px,5vw,72px);bottom:clamp(40px,5vw,72px);
+  width:1px;background:linear-gradient(to bottom,transparent,var(--border) 30%,var(--border) 70%,transparent);
+}
+.proj-block.reverse .proj-info::before{left:auto;right:0}
+.proj-num{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.22em;color:var(--dim);margin-bottom:20px}
+.proj-title{
+  font-family:'Bebas Neue',cursive;font-size:clamp(44px,5.5vw,84px);
+  line-height:.88;color:var(--white);margin-bottom:16px;
+  transition:color var(--dur-fast);
+}
+.proj-block:hover .proj-title{color:var(--gold)}
+.proj-cat-row{display:flex;align-items:center;gap:16px;margin-bottom:clamp(24px,3vw,40px)}
+.proj-cat{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.proj-year{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.15em;color:var(--dim)}
+.proj-sep{width:1px;height:14px;background:var(--border)}
+.proj-summary{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.5vw,20px);
+  font-weight:300;line-height:1.7;color:var(--off);
+  margin-bottom:clamp(28px,3.5vw,48px);
+}
+.proj-tech{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(32px,4vw,52px)}
+.tech-tag{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--off);border:1px solid var(--border);padding:5px 12px;
+  transition:color var(--dur-fast),border-color var(--dur-fast);
+}
+.proj-block:hover .tech-tag{color:var(--gold);border-color:rgba(201,169,110,.25)}
+.proj-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--white);border-bottom:1px solid var(--border);
+  padding-bottom:4px;align-self:flex-start;
+  transition:color var(--dur-fast),border-color var(--dur-fast);
+}
+.proj-cta .arr{transition:transform var(--dur-mid) var(--ease-out)}
+.proj-cta:hover{color:var(--gold);border-color:var(--gold)}
+.proj-cta:hover .arr{transform:translate(4px,-4px)}
+
+/* ============================================================
+   SECTION 3 â€” CASE STUDY PREVIEW
+   ============================================================ */
+#case-study{padding:var(--sp-xl) 0;background:var(--coal);border-top:1px solid var(--border)}
+.cs-header{margin-bottom:clamp(60px,8vw,100px)}
+.cs-header .label{margin-bottom:20px}
+.cs-header .display{font-size:clamp(48px,6.5vw,100px)}
+
+.cs-block{
+  display:grid;grid-template-columns:3fr 9fr;gap:clamp(40px,6vw,80px);
+  padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--border);
+  position:relative;
+}
+.cs-block::before{
+  content:'';position:absolute;left:0;top:0;width:40px;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur-slow) var(--ease-out);
+}
+.cs-block.visible-cs::before{transform:scaleX(1)}
+.cs-left{}
+.cs-project-name{
+  font-family:'Bebas Neue',cursive;font-size:clamp(28px,3vw,44px);
+  color:var(--white);line-height:.95;margin-bottom:12px;
+}
+.cs-role{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.cs-period{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:var(--text-sm);color:var(--dim)}
+.cs-right{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px}
+.cs-pillar{
+  padding:clamp(24px,3vw,40px) clamp(20px,2.5vw,32px);
+  border:1px solid var(--border);
+  transition:background var(--dur-mid) var(--ease-out),border-color var(--dur-mid) var(--ease-out);
+}
+.cs-pillar:hover{background:rgba(201,169,110,.025);border-color:var(--border-hover)}
+.cs-pillar-icon{
+  font-size:20px;color:var(--dim);margin-bottom:16px;
+  transition:color var(--dur-fast);
+}
+.cs-pillar:hover .cs-pillar-icon{color:var(--gold)}
+.cs-pillar-head{
+  font-family:'Bebas Neue',cursive;font-size:clamp(20px,2.2vw,30px);
+  color:var(--white);margin-bottom:12px;transition:color var(--dur-fast);
+}
+.cs-pillar:hover .cs-pillar-head{color:var(--gold)}
+.cs-pillar-body{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,17px);
+  font-weight:300;line-height:1.65;color:var(--off);
+}
+/* Metrics row */
+.cs-metrics{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-top:2px;
+}
+.cs-metric{
+  padding:clamp(20px,2.5vw,32px);border:1px solid var(--border);
+  display:flex;flex-direction:column;gap:8px;
+  transition:background var(--dur-mid);
+}
+.cs-metric:hover{background:rgba(255,255,255,.02)}
+.cs-metric-val{
+  font-family:'Bebas Neue',cursive;font-size:clamp(32px,4vw,60px);
+  line-height:1;color:var(--white);
+}
+.cs-metric-val span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.6em;color:var(--gold)}
+.cs-metric-lbl{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* ============================================================
+   SECTION 4 â€” VISUAL GALLERY
+   ============================================================ */
+#visual-gallery{padding:var(--sp-xl) 0;background:var(--deep);border-top:1px solid var(--border)}
+.gallery-header{margin-bottom:clamp(48px,6vw,80px)}
+.gallery-header .label{margin-bottom:20px}
+.gallery-header .display{font-size:clamp(44px,6vw,96px)}
+
+.gallery-masonry{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:clamp(80px,8vw,120px);
+  gap:2px;
+}
+.gallery-item{
+  position:relative;overflow:hidden;background:var(--surface);cursor:pointer;
+  transition:transform var(--dur-mid) var(--ease-out);
+}
+.gallery-item:focus-visible{outline:2px solid var(--gold)}
+.gallery-item:hover{z-index:2}
+.gallery-item .gi-inner{
+  position:absolute;inset:0;
+  transition:transform var(--dur-slow) var(--ease-out);
+  display:flex;align-items:center;justify-content:center;
+}
+.gallery-item:hover .gi-inner{transform:scale(1.06)}
+.gallery-item .gi-overlay{
+  position:absolute;inset:0;
+  background:rgba(201,169,110,.06);
+  opacity:0;transition:opacity var(--dur-mid);
+}
+.gallery-item:hover .gi-overlay{opacity:1}
+.gallery-item .gi-label{
+  position:absolute;bottom:clamp(10px,1.5vw,20px);left:clamp(10px,1.5vw,20px);
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);opacity:0;transform:translateY(8px);
+  transition:opacity var(--dur-mid),transform var(--dur-mid) var(--ease-out);
+}
+.gallery-item:hover .gi-label{opacity:1;transform:translateY(0)}
+
+/* Gallery grid placements */
+.gi-1{grid-column:span 5;grid-row:span 4}
+.gi-2{grid-column:span 4;grid-row:span 2}
+.gi-3{grid-column:span 3;grid-row:span 2}
+.gi-4{grid-column:span 4;grid-row:span 2}
+.gi-5{grid-column:span 3;grid-row:span 2}
+.gi-6{grid-column:span 7;grid-row:span 3}
+.gi-7{grid-column:span 3;grid-row:span 3}
+.gi-8{grid-column:span 2;grid-row:span 3}
+
+/* ============================================================
+   SECTION 5 â€” PROCESS / WORKFLOW
+   ============================================================ */
+#process{padding:var(--sp-xl) 0;background:var(--black);border-top:1px solid var(--border)}
+.process-header{margin-bottom:clamp(60px,8vw,100px)}
+.process-header .label{margin-bottom:20px}
+.process-header .display{font-size:clamp(48px,6.5vw,100px)}
+
+.process-track{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+}
+.process-step{
+  padding:clamp(32px,4vw,52px) clamp(24px,3vw,40px);
+  border:1px solid var(--border);position:relative;overflow:hidden;
+  transition:background var(--dur-mid) var(--ease-out),border-color var(--dur-mid) var(--ease-out);
+}
+.process-step::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur-slow) var(--ease-out);
+}
+.process-step:hover{background:rgba(201,169,110,.022);border-color:var(--border-hover)}
+.process-step:hover::before{transform:scaleX(1)}
+.ps-num{
+  font-family:'Bebas Neue',cursive;font-size:clamp(52px,6vw,88px);
+  line-height:1;color:rgba(255,255,255,.05);margin-bottom:20px;
+}
+.ps-icon{font-size:22px;color:var(--dim);margin-bottom:16px;transition:color var(--dur-fast)}
+.process-step:hover .ps-icon{color:var(--gold)}
+.ps-title{
+  font-family:'Bebas Neue',cursive;font-size:clamp(24px,2.5vw,36px);
+  color:var(--white);margin-bottom:14px;transition:color var(--dur-fast);
+}
+.process-step:hover .ps-title{color:var(--gold)}
+.ps-body{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,17px);
+  font-weight:300;line-height:1.65;color:var(--off);
+}
+
+/* Bottom row â€” 4 more steps */
+.process-track-2{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px;
+}
+
+/* ============================================================
+   SECTION 6 â€” TESTIMONIAL / IMPACT
+   ============================================================ */
+#testimonial{padding:var(--sp-xl) 0;background:var(--coal);border-top:1px solid var(--border);position:relative;overflow:hidden}
+#testimonial::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,169,110,.045) 0%,transparent 60%);
+  pointer-events:none;
+}
+.testimonial-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.testimonial-quote-side{
+  padding:clamp(52px,7vw,88px) clamp(40px,5.5vw,72px);
+  border:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;
+  background:rgba(201,169,110,.018);
+}
+.t-quote-mark{
+  font-family:'Cormorant Garamond',serif;font-size:clamp(60px,9vw,120px);
+  line-height:.7;color:rgba(201,169,110,.2);margin-bottom:clamp(20px,2.5vw,36px);
+}
+.t-quote-text{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+  font-size:clamp(20px,2.2vw,30px);line-height:1.45;color:var(--white-dim);
+  margin-bottom:clamp(28px,3.5vw,48px);flex:1;
+}
+.t-quote-attr{display:flex;flex-direction:column;gap:4px}
+.t-quote-name{
+  font-family:'Bebas Neue',cursive;font-size:clamp(18px,2vw,26px);
+  color:var(--white);letter-spacing:.04em;
+}
+.t-quote-role{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+
+.testimonial-metrics-side{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+}
+.t-metric{
+  padding:clamp(32px,4vw,52px) clamp(24px,3vw,40px);
+  border:1px solid var(--border);display:flex;flex-direction:column;
+  justify-content:flex-end;gap:10px;position:relative;overflow:hidden;
+  transition:background var(--dur-mid) var(--ease-out);
+}
+.t-metric::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur-slow) var(--ease-out);
+}
+.t-metric:hover{background:rgba(255,255,255,.025)}
+.t-metric:hover::before{transform:scaleX(1)}
+.t-metric-val{
+  font-family:'Bebas Neue',cursive;font-size:clamp(40px,5.5vw,80px);
+  line-height:1;color:var(--white);
+}
+.t-metric-val span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.55em;color:var(--gold)}
+.t-metric-lbl{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* ============================================================
+   SECTION 7 â€” CONTACT CTA
+   ============================================================ */
+#work-cta{
+  padding:var(--sp-xl) 0;background:var(--deep);border-top:1px solid var(--border);
+  position:relative;overflow:hidden;text-align:center;
+}
+#work-cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,169,110,.055) 0%,transparent 55%);
+  pointer-events:none;
+}
+.work-cta-inner{position:relative;z-index:2}
+.work-cta-inner .label{justify-content:center;margin-bottom:clamp(24px,3vw,40px)}
+.work-cta-h{
+  font-family:'Bebas Neue',cursive;font-size:clamp(52px,9vw,140px);
+  line-height:.86;color:var(--white);margin-bottom:clamp(20px,2.5vw,36px);
+}
+.work-cta-h em{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:300;font-size:.6em;color:var(--gold);display:block;
+}
+.work-cta-sub{
+  font-family:'Cormorant Garamond',serif;font-size:var(--text-xl);
+  font-weight:300;line-height:1.65;color:var(--off);
+  max-width:480px;margin:0 auto clamp(36px,4vw,56px);
+}
+.avail-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.18em;text-transform:uppercase;color:#7ecb96;
+  border:1px solid rgba(126,203,150,.25);padding:9px 18px;
+  margin-bottom:clamp(32px,4vw,52px);
+}
+.avail-dot{width:6px;height:6px;background:#7ecb96;border-radius:50%;animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.btn-group{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:clamp(40px,5vw,64px)}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--black);background:var(--gold);
+  padding:clamp(13px,1.4vw,17px) clamp(28px,3.5vw,48px);
+  transition:background var(--dur-fast),transform var(--dur-fast);
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+.btn-primary .arr{transition:transform var(--dur-mid) var(--ease-out)}
+.btn-primary:hover .arr{transform:translate(3px,-3px)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--off);border:1px solid var(--border);
+  padding:clamp(13px,1.4vw,17px) clamp(28px,3.5vw,48px);
+  transition:color var(--dur-fast),border-color var(--dur-fast),transform var(--dur-fast);
+}
+.btn-secondary:hover{color:var(--white);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.work-cta-social{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(20px,3vw,40px);
+  border-top:1px solid var(--border);padding-top:clamp(32px,4vw,52px);
+}
+.work-cta-social a{
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);transition:color var(--dur-fast);padding:6px 0;
+}
+.work-cta-social a:hover{color:var(--gold)}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{padding:clamp(24px,3vw,36px) 0;border-top:1px solid var(--border);background:var(--black)}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.footer-left{font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.15em;color:var(--dim);text-transform:uppercase}
+.footer-center{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:var(--text-base);color:var(--dim)}
+.back-top{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:var(--text-xs);letter-spacing:.15em;
+  text-transform:uppercase;color:var(--dim);transition:color var(--dur-fast);
+}
+.back-top:hover{color:var(--gold)}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1100px){
+  .proj-block{grid-template-columns:1fr;min-height:auto}
+  .proj-block.reverse{direction:ltr}
+  .proj-thumb{padding-top:60%}
+  .proj-info::before{display:none}
+  .cs-right{grid-template-columns:1fr 1fr}
+  .cs-metrics{grid-template-columns:1fr 1fr}
+  .gallery-masonry{grid-template-columns:repeat(6,1fr)}
+  .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8{grid-column:span 3;grid-row:span 2}
+  .process-track,.process-track-2{grid-template-columns:repeat(2,1fr)}
+  .testimonial-inner{grid-template-columns:1fr}
+  .testimonial-metrics-side{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav-desktop{display:none}
+  .nav-hamburger{display:flex}
+  .cs-block{grid-template-columns:1fr}
+  .cs-right{grid-template-columns:1fr}
+  .cs-metrics{grid-template-columns:1fr 1fr}
+  .gallery-masonry{grid-template-columns:repeat(4,1fr)}
+  .gi-1,.gi-6{grid-column:span 4;grid-row:span 2}
+  .gi-2,.gi-3,.gi-4,.gi-5,.gi-7,.gi-8{grid-column:span 2;grid-row:span 2}
+  .process-track,.process-track-2{grid-template-columns:1fr 1fr}
+  .work-hero-foot{flex-direction:column;align-items:flex-start}
+  .work-hero-count{display:none}
+}
+@media(max-width:480px){
+  .btn-group{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .footer-inner{flex-direction:column;text-align:center}
+  .cs-metrics{grid-template-columns:1fr}
+  .process-track,.process-track-2{grid-template-columns:1fr}
+  .gallery-masonry{grid-template-columns:1fr 1fr}
+  .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,.gi-7,.gi-8{grid-column:span 2;grid-row:span 2}
+}
+
+/* ============================================================
+   CINEMATIC BACKGROUND SYSTEM
+   Inspired by: layered ambient glow, slow organic drift,
+   muted purple-navy-amber palette, premium grain
+   ============================================================ */
+
+
+@keyframes orbDrift2 {
+  0%   { transform: translate(0,   0)    scale(1);    opacity: 0.70; }
+  40%  { transform: translate(5%,  -5%)  scale(1.08); opacity: 0.82; }
+  80%  { transform: translate(-4%, 3%)   scale(0.95); opacity: 0.68; }
+  100% { transform: translate(3%,  -7%)  scale(1.05); opacity: 0.76; }
+}
+@keyframes orbDrift3 {
+  0%   { transform: translate(0,   0)    scale(1);    opacity: 0.65; }
+  30%  { transform: translate(-4%, -4%)  scale(1.05); opacity: 0.78; }
+  70%  { transform: translate(6%,   3%)  scale(0.96); opacity: 0.62; }
+  100% { transform: translate(-2%,  6%)  scale(1.03); opacity: 0.72; }
+}
+@keyframes orbDrift4 {
+  0%   { transform: translate(0,   0)    scale(1);    opacity: 0.60; }
+  50%  { transform: translate(-8%, 5%)   scale(1.10); opacity: 0.75; }
+  100% { transform: translate(4%, -4%)   scale(0.94); opacity: 0.65; }
+}
+@keyframes orbDrift5 {
+  0%   { transform: translate(0,   0)    scale(1);    opacity: 0.55; }
+  45%  { transform: translate(6%,  -6%)  scale(1.07); opacity: 0.70; }
+  100% { transform: translate(-5%, 4%)   scale(0.97); opacity: 0.58; }
+}
+
+/* â”€â”€ 9. SCROLL-LINKED PARALLAX HINT (CSS only, no JS repaints) â”€â”€ */
+/* Orbs use animation-delay offset to feel non-synchronized */
+.cb-orb-1 { animation-delay: 0s;   }
+.cb-orb-2 { animation-delay: -8s;  }
+.cb-orb-3 { animation-delay: -14s; }
+.cb-orb-4 { animation-delay: -5s;  }
+.cb-orb-5 { animation-delay: -11s; }
+
+/* â”€â”€ 10. REDUCED MOTION â”€â”€ */
+@media (prefers-reduced-motion: reduce) {
+  .cb-orb { animation: none !important; }
+}
+
+/* â”€â”€ 11. MOBILE PERF â€” simplify on small screens â”€â”€ */
+@media (max-width: 768px) {
+  .cb-orb { filter: blur(60px); }
+  .cb-orb-3, .cb-orb-5 { display: none; }
+}
+
+
+/* ============================================================
+   PORTAVIA COLOR SYSTEM â€” applied globally
+   ============================================================ */
+:root {
+  /* Base */
+  --black:        #0D0D0D;
+  --deep:         #0A0A0A;
+  --coal:         #111111;
+  --surface:      #161616;
+  --surface-2:    #1C1C1C;
+
+  /* Borders */
+  --border:       rgba(255,255,255,0.10);
+  --border-hover: rgba(200,255,87,0.35);
+
+  /* Text */
+  --white:        #FFFFFF;
+  --white-dim:    rgba(255,255,255,0.80);
+  --off:          #888888;
+  --dim:          #444444;
+
+  /* Accent â€” Portavia lime */
+  --gold:         #C8FF57;
+  --gold-light:   #DAFF80;
+  --gold-dim:     rgba(200,255,87,0.10);
+
+  /* Shadows */
+  --glow-sm:      0 0 40px rgba(200,255,87,0.08);
+  --glow-md:      0 0 80px rgba(200,255,87,0.12);
+}
+
+/* â”€â”€ BACKGROUND â€” Portavia exact style â”€â”€ */
+/* Deep black with a very faint upward gradient glow */
+html {
+  background: #0D0D0D;
+}
+body {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%,
+      rgba(200,255,87,0.04) 0%,
+      transparent 60%),
+    #0D0D0D;
+}
+
+/* Remove the cinema-bg system */
+#cinema-bg { display: none !important; }
+
+/* â”€â”€ NAV active state â”€â”€ */
+.nav-links-list a.active { color: #C8FF57 !important; }
+.nav-links-list a.active::after { background: #C8FF57 !important; }
+.nav-links-list a::after { background: #C8FF57 !important; }
+
+/* â”€â”€ NAV CTA button â”€â”€ */
+.nav-cta-btn {
+  background: #C8FF57 !important;
+  color: #0D0D0D !important;
+}
+.nav-cta-btn:hover { background: #DAFF80 !important; }
+
+/* â”€â”€ Primary buttons â”€â”€ */
+.btn-primary {
+  background: #C8FF57 !important;
+  color: #0D0D0D !important;
+}
+.btn-primary:hover { background: #DAFF80 !important; }
+.nav-cta-btn, .nav-cta-btn:hover { color: #0D0D0D !important; }
+
+/* â”€â”€ Section backgrounds â€” flat dark surfaces â”€â”€ */
+#hero, #work-hero, #about-hero   { background: transparent !important; }
+.marquee-wrap                     { background: #111111 !important; }
+#about, #about-me                { background: #0D0D0D !important; }
+#projects, #featured-projects    { background: #0A0A0A !important; }
+#motion, #what-i-do, #approach  { background: #111111 !important; }
+#philosophy, #process            { background: #0D0D0D !important; }
+#contact, #about-cta, #work-cta { background: #0A0A0A !important; }
+#case-study, #visual-gallery     { background: #0A0A0A !important; }
+#experience, #certifications     { background: #0D0D0D !important; }
+#testimonial                     { background: #111111 !important; }
+#quote-section                   { background: #111111 !important; }
+footer                           { background: #0A0A0A !important; }
+
+/* â”€â”€ Hero background â€” Portavia has a faint subtle gradient only â”€â”€ */
+.hero-bg, .about-hero-bg, .work-hero-bg,
+#contact::before, #work-cta::before,
+#about-cta::before, #testimonial::before {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%,
+      rgba(200,255,87,0.04) 0%,
+      transparent 60%) !important;
+}
+
+/* â”€â”€ Grain texture â€” keep subtle â”€â”€ */
+/* Portavia has zero grain, so remove it */
+body::before { display: none !important; }
+
+/* â”€â”€ Hover line accent â”€â”€ */
+.nav-links-list a:hover { color: var(--white) !important; }
+
+/* â”€â”€ Availability dot â”€â”€ */
+.avail-dot { background: #C8FF57 !important; }
+.avail-badge { color: #C8FF57 !important; border-color: rgba(200,255,87,0.25) !important; }
+
+/* â”€â”€ Labels â”€â”€ */
+.label { color: #C8FF57 !important; }
+.label::before { color: #444444 !important; }
+
+/* â”€â”€ Stat superscripts â”€â”€ */
+.stat-val sup, .whs-val span, .stat-val span { color: #C8FF57 !important; }
+
+/* â”€â”€ Display italic (em) â”€â”€ */
+.display em, .hero-h1 em, .about-hero-h1 em,
+.work-hero-h1 em, .about-intro-name em,
+.work-cta-h em, .about-cta-h em,
+.contact-h2 em, .hero-h1 .italic-line { color: #C8FF57 !important; }
+
+/* â”€â”€ Project/card hover accent â”€â”€ */
+.proj-block:hover .proj-title,
+.wid-card:hover .wid-card-title,
+.project-card:hover .project-title,
+.cert-card:hover .cert-name,
+.exp-item:hover,
+.approach-item:hover .approach-title { color: #C8FF57 !important; }
+
+/* â”€â”€ Tech/project tags on hover â”€â”€ */
+.proj-block:hover .tech-tag,
+.project-card:hover .project-tag,
+.proj-block:hover .proj-cat { color: #C8FF57 !important; border-color: rgba(200,255,87,0.25) !important; }
+
+/* â”€â”€ Process/philosophy card top border on hover â”€â”€ */
+.process-step::before,
+.philo-card::after,
+.exp-item::after,
+.cs-block::before,
+.approach-item::before,
+.wid-card::before,
+.cert-card::before,
+.t-metric::before { background: #C8FF57 !important; }
+.process-step:hover .ps-icon,
+.process-step:hover .ps-title { color: #C8FF57 !important; }
+
+/* â”€â”€ CTA link arrows â”€â”€ */
+.proj-cta:hover,
+.proj-cta:hover .arr,
+.link-ghost:hover,
+.view-all-link:hover,
+.back-top:hover,
+.contact-link:hover,
+.work-cta-social a:hover,
+.contact-social a:hover,
+.mobile-nav-social a:hover { color: #C8FF57 !important; }
+
+.proj-cta:hover { border-color: #C8FF57 !important; }
+.link-ghost:hover { color: #C8FF57 !important; border-color: rgba(200,255,87,0.3) !important; }
+.view-all-link:hover { color: #C8FF57 !important; border-color: rgba(200,255,87,0.3) !important; }
+
+/* â”€â”€ Quote decorative mark â”€â”€ */
+.quote-mark, .t-quote-mark { color: rgba(200,255,87,0.15) !important; }
+
+/* â”€â”€ Metric values accent â”€â”€ */
+.cs-metric-val span,
+.t-metric-val span,
+.stat-val sup { color: #C8FF57 !important; }
+
+/* â”€â”€ Scroll bar in hero â”€â”€ */
+.scroll-bar { background: linear-gradient(to bottom, #C8FF57, transparent) !important; }
+
+/* â”€â”€ Hero eyebrow line â”€â”€ */
+.hero-eyebrow { color: #C8FF57 !important; }
+.hero-eyebrow::before { background: #C8FF57 !important; }
+
+/* â”€â”€ Cert/Gallery hover â”€â”€ */
+.cs-pillar:hover .cs-pillar-icon,
+.cs-pillar:hover .cs-pillar-head,
+.cert-card:hover .cert-badge { color: #C8FF57 !important; border-color: rgba(200,255,87,0.3) !important; }
+
+/* â”€â”€ Skill chips â”€â”€ */
+.skill-chip:hover {
+  color: #C8FF57 !important;
+  border-color: rgba(200,255,87,0.3) !important;
+  background: rgba(200,255,87,0.08) !important;
+}
+
+/* â”€â”€ Filter buttons â”€â”€ */
+.filter-btn.active, .filter-btn:hover {
+  color: #C8FF57 !important;
+  border-color: rgba(200,255,87,0.3) !important;
+  background: rgba(200,255,87,0.08) !important;
+}
+
+/* â”€â”€ Portrait glow â”€â”€ */
+.portrait-glow { background: radial-gradient(ellipse at bottom, rgba(200,255,87,0.12) 0%, transparent 70%) !important; }
+.hero-image-glow { background: radial-gradient(ellipse at center, rgba(200,255,87,0.14) 0%, transparent 70%) !important; }
+
+/* â”€â”€ Gallery hover overlay â”€â”€ */
+.gallery-item .gi-label { color: #C8FF57 !important; }
+.gallery-item .gi-overlay { background: rgba(200,255,87,0.04) !important; }
+
+/* â”€â”€ Testimonial quote role â”€â”€ */
+.t-quote-role { color: #C8FF57 !important; }
+
+/* â”€â”€ Border hover upgrade â”€â”€ */
+.wid-card:hover, .approach-item:hover,
+.exp-item:hover, .philo-card:hover { border-color: rgba(200,255,87,0.18) !important; }
+
+/* â”€â”€ About hero breadcrumb â”€â”€ */
+.about-hero-breadcrumb a:hover,
+.work-breadcrumb a:hover { color: #C8FF57 !important; }
+
+/* â”€â”€ Marquee separator dots â”€â”€ */
+.marquee-track .sep, .marquee-track .dot { color: #C8FF57 !important; }
+
+</style>
+</head>
+<body>
+
+<!-- â•â•â• CINEMATIC BACKGROUND â•â•â• -->
+<div id="cinema-bg" aria-hidden="true">
+  <div class="cb-orb cb-orb-1"></div>
+  <div class="cb-orb cb-orb-2"></div>
+  <div class="cb-orb cb-orb-3"></div>
+  <div class="cb-orb cb-orb-4"></div>
+  <div class="cb-orb cb-orb-5"></div>
+</div>
+
+
+<a href="#main" style="position:absolute;left:-9999px;top:0;z-index:9999;background:var(--gold);color:var(--black);padding:12px 20px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Skip to content</a>
+
+<!-- â•â•â•â•â•â•â• NAV â•â•â•â•â•â•â• -->
+<header role="banner">
+  <nav id="site-nav" aria-label="Primary navigation">
+    <a href="home.html" class="nav-logo" aria-label="Ajay â€” Home">AJAY</a>
+    <div class="nav-desktop">
+      <ul class="nav-links-list">
+        <li><a href="home.html" class="mobile-link">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="work.html" class="active" aria-current="page">Work</a></li>
+        <li><a href="assets/Resume.pdf">View Resume</a></li>
+      </ul>
+      <a href="home.html#contact" class="nav-cta-btn">Let's Talk</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
+  <nav class="mobile-nav-links">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="work.html">Work</a>
+    <a href="home.html#contact">Contact</a>
+  </nav>
+  <div class="mobile-nav-bottom">
+    <div class="mobile-nav-social">
+      <a href="#">Twitter</a><a href="#">Dribbble</a><a href="#">GitHub</a>
+    </div>
+    <span class="mobile-nav-email">ajayalexander.a@gmail.com</span>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â• MAIN â•â•â•â•â•â•â• -->
+<main id="main">
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 1 â€” WORK HERO
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="work-hero" aria-labelledby="work-hero-h">
+  <div class="work-hero-bg" aria-hidden="true"></div>
+  <div class="work-hero-grid" aria-hidden="true"></div>
+  <div class="work-hero-count" aria-hidden="true">05</div>
+  <div class="container work-hero-inner">
+    <div class="work-breadcrumb">
+      <a href="home.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span>Work</span>
+    </div>
+    <h1 class="work-hero-h1" id="work-hero-h">
+      Selected<br><em>Work</em>
+    </h1>
+    <div class="work-hero-foot">
+      <p class="work-hero-desc">Designing products that merge strategy, emotion, and usability â€” from fintech platforms to enterprise systems.</p>
+      <div class="work-hero-stats">
+        <div class="whs"><div class="whs-val">30<span>+</span></div><div class="whs-lbl">Projects</div></div>
+        <div class="whs"><div class="whs-val">4<span>+</span></div><div class="whs-lbl">Years</div></div>
+        <div class="whs"><div class="whs-val">2<span>Ã—</span></div><div class="whs-lbl">Certified</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" role="toolbar" aria-label="Filter projects by category">
+  <div class="container">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+    <button class="filter-btn" data-filter="ux" aria-pressed="false">UX Design</button>
+    <button class="filter-btn" data-filter="ui" aria-pressed="false">UI Design</button>
+    <button class="filter-btn" data-filter="product" aria-pressed="false">Product</button>
+    <button class="filter-btn" data-filter="brand" aria-pressed="false">Branding</button>
+  </div>
+</div>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 2 â€” FEATURED PROJECTS
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="featured-projects" aria-labelledby="fp-h">
+  <div class="container">
+    <div class="fp-header sr">
+      <p class="label" data-num="01">Selected Work</p>
+      <h2 id="fp-h" class="display">Featured<br><em>Projects</em></h2>
+    </div>
+    <div class="projects-stack">
+
+      <!-- PROJECT 1: Swipewire Fintech -->
+      <article class="proj-block sr d1" data-category="ux product" aria-label="Swipewire â€” Fintech UX Platform">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner">
+            <div class="proj-thumb-art" aria-hidden="true">
+              <svg viewBox="0 0 700 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="pg1" cx="40%" cy="50%" r="65%">
+                    <stop offset="0%" stop-color="#c9a96e" stop-opacity=".14"/>
+                    <stop offset="100%" stop-color="#06080f" stop-opacity="1"/>
+                  </radialGradient>
+                  <linearGradient id="pl1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#c9a96e" stop-opacity=".3"/>
+                    <stop offset="100%" stop-color="#c9a96e" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <rect width="700" height="600" fill="#06080f"/>
+                <rect width="700" height="600" fill="url(#pg1)"/>
+                <!-- Dashboard wireframe -->
+                <rect x="60" y="80" width="580" height="440" rx="4" fill="rgba(255,255,255,0.03)" stroke="rgba(201,169,110,0.12)" stroke-width="1"/>
+                <!-- Top bar -->
+                <rect x="60" y="80" width="580" height="44" rx="4" fill="rgba(201,169,110,0.06)"/>
+                <circle cx="92" cy="102" r="8" fill="rgba(201,169,110,0.3)"/>
+                <rect x="110" y="97" width="60" height="10" rx="2" fill="rgba(255,255,255,0.12)"/>
+                <!-- Sidebar -->
+                <rect x="60" y="124" width="120" height="396" fill="rgba(255,255,255,0.02)"/>
+                <rect x="76" y="148" width="88" height="8" rx="2" fill="rgba(255,255,255,0.08)"/>
+                <rect x="76" y="168" width="72" height="8" rx="2" fill="rgba(255,255,255,0.05)"/>
+                <rect x="76" y="188" width="80" height="8" rx="2" fill="rgba(255,255,255,0.05)"/>
+                <rect x="76" y="208" width="66" height="8" rx="2" fill="rgba(201,169,110,0.25)"/>
+                <!-- Cards -->
+                <rect x="196" y="140" width="132" height="80" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(201,169,110,0.15)" stroke-width="1"/>
+                <rect x="344" y="140" width="132" height="80" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                <rect x="492" y="140" width="132" height="80" rx="3" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                <!-- Chart area -->
+                <rect x="196" y="236" width="428" height="180" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <polyline points="216,380 260,340 310,358 360,310 410,320 460,280 510,295 560,260 600,275" stroke="url(#pl1)" stroke-width="2" fill="none"/>
+                <polyline points="216,380 260,355 310,370 360,340 410,345 460,310 510,328 560,298 600,310" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+                <!-- Table -->
+                <rect x="196" y="432" width="428" height="72" rx="3" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <rect x="196" y="432" width="428" height="20" fill="rgba(255,255,255,0.03)"/>
+                <text x="60" y="576" font-family="serif" font-style="italic" font-size="10" fill="rgba(201,169,110,0.3)" letter-spacing="4">SWIPEWIRE  Â·  FINTECH PLATFORM  Â·  2022â€“PRESENT</text>
+              </svg>
+            </div>
+          </div>
+          <div class="proj-thumb-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-num">Project 01</div>
+          <h3 class="proj-title">Swipewire<br>Fintech</h3>
+          <div class="proj-cat-row">
+            <span class="proj-cat">UX / Product Design</span>
+            <span class="proj-sep" aria-hidden="true"></span>
+            <span class="proj-year">2022 â€” Present</span>
+          </div>
+          <p class="proj-summary">End-to-end UX for a fintech web platform â€” from user research and information architecture through to high-fidelity prototyping and handoff. Redesigned core transaction flows, reducing friction by 40%.</p>
+          <div class="proj-tech" aria-label="Tools used">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Prototyping</span>
+            <span class="tech-tag">User Research</span>
+            <span class="tech-tag">Design Systems</span>
+            <span class="tech-tag">Usability Testing</span>
+          </div>
+          <a href="#case-study" class="proj-cta" aria-label="View Swipewire case study">
+            View Case Study <span class="arr" aria-hidden="true">â†—</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- PROJECT 2: Alo Groups â€” reversed -->
+      <article class="proj-block reverse sr d2" data-category="ui brand" aria-label="Alo Groups â€” Brand & UI Design">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner">
+            <div class="proj-thumb-art" aria-hidden="true">
+              <svg viewBox="0 0 700 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="pg2" cx="60%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#6e8cc9" stop-opacity=".14"/>
+                    <stop offset="100%" stop-color="#060810" stop-opacity="1"/>
+                  </radialGradient>
+                </defs>
+                <rect width="700" height="600" fill="#060810"/>
+                <rect width="700" height="600" fill="url(#pg2)"/>
+                <!-- Mobile screens -->
+                <rect x="80" y="80" width="200" height="400" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(110,140,201,0.2)" stroke-width="1.5"/>
+                <rect x="80" y="80" width="200" height="48" rx="16" fill="rgba(110,140,201,0.08)"/>
+                <rect x="104" y="152" width="152" height="100" rx="6" fill="rgba(255,255,255,0.04)"/>
+                <rect x="104" y="268" width="76" height="8" rx="2" fill="rgba(255,255,255,0.15)"/>
+                <rect x="104" y="284" width="120" height="6" rx="2" fill="rgba(255,255,255,0.06)"/>
+                <rect x="104" y="296" width="104" height="6" rx="2" fill="rgba(255,255,255,0.06)"/>
+                <rect x="104" y="320" width="152" height="36" rx="4" fill="rgba(110,140,201,0.2)"/>
+
+                <rect x="320" y="140" width="200" height="400" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(110,140,201,0.12)" stroke-width="1.5"/>
+                <rect x="344" y="184" width="152" height="24" rx="4" fill="rgba(255,255,255,0.08)"/>
+                <rect x="344" y="220" width="76" height="76" rx="6" fill="rgba(110,140,201,0.12)"/>
+                <rect x="432" y="220" width="64" height="36" rx="4" fill="rgba(255,255,255,0.05)"/>
+                <rect x="432" y="262" width="64" height="34" rx="4" fill="rgba(255,255,255,0.05)"/>
+                <rect x="344" y="316" width="152" height="6" rx="2" fill="rgba(255,255,255,0.1)"/>
+                <rect x="344" y="330" width="120" height="6" rx="2" fill="rgba(255,255,255,0.06)"/>
+                <text x="80" y="576" font-family="serif" font-style="italic" font-size="10" fill="rgba(110,140,201,0.3)" letter-spacing="4">ALO GROUPS  Â·  UI/UX &amp; BRAND  Â·  2021â€“2022</text>
+              </svg>
+            </div>
+          </div>
+          <div class="proj-thumb-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-num">Project 02</div>
+          <h3 class="proj-title">Alo Groups<br>Platform</h3>
+          <div class="proj-cat-row">
+            <span class="proj-cat">UI / Brand Design</span>
+            <span class="proj-sep" aria-hidden="true"></span>
+            <span class="proj-year">2021 â€” 2022</span>
+          </div>
+          <p class="proj-summary">Full-spectrum design for mobile and web platforms â€” brand identity, component libraries, and cross-platform UI systems. Collaborated with engineering and product teams to ship consistent, accessible interfaces.</p>
+          <div class="proj-tech" aria-label="Tools used">
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Illustrator</span>
+            <span class="tech-tag">Brand Identity</span>
+            <span class="tech-tag">Component Library</span>
+          </div>
+          <a href="#case-study" class="proj-cta">View Case Study <span class="arr" aria-hidden="true">â†—</span></a>
+        </div>
+      </article>
+
+      <!-- PROJECT 3: Freelance -->
+      <article class="proj-block sr d3" data-category="brand ui" aria-label="Freelance â€” Digital & Social Design">
+        <div class="proj-thumb">
+          <div class="proj-thumb-inner">
+            <div class="proj-thumb-art" aria-hidden="true">
+              <svg viewBox="0 0 700 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="pg3" cx="50%" cy="60%" r="60%">
+                    <stop offset="0%" stop-color="#c9a96e" stop-opacity=".1"/>
+                    <stop offset="100%" stop-color="#0a0804" stop-opacity="1"/>
+                  </radialGradient>
+                </defs>
+                <rect width="700" height="600" fill="#0a0804"/>
+                <rect width="700" height="600" fill="url(#pg3)"/>
+                <!-- Poster grid -->
+                <g fill="rgba(255,255,255,0.04)" stroke="rgba(201,169,110,0.1)" stroke-width="1">
+                  <rect x="60" y="80" width="180" height="240" rx="4"/>
+                  <rect x="256" y="80" width="180" height="112" rx="4"/>
+                  <rect x="256" y="208" width="180" height="112" rx="4"/>
+                  <rect x="452" y="80" width="188" height="240" rx="4"/>
+                  <rect x="60" y="336" width="388" height="160" rx="4"/>
+                  <rect x="464" y="336" width="176" height="160" rx="4"/>
+                </g>
+                <!-- Accent lines in cards -->
+                <line x1="80" y1="130" x2="220" y2="130" stroke="rgba(201,169,110,0.2)" stroke-width="1"/>
+                <line x1="276" y1="112" x2="416" y2="112" stroke="rgba(201,169,110,0.15)" stroke-width="1"/>
+                <circle cx="492" cy="140" r="36" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="1"/>
+                <circle cx="492" cy="140" r="20" fill="none" stroke="rgba(201,169,110,0.1)" stroke-width="1"/>
+                <text x="60" y="576" font-family="serif" font-style="italic" font-size="10" fill="rgba(201,169,110,0.28)" letter-spacing="4">FREELANCE  Â·  DIGITAL &amp; SOCIAL DESIGN  Â·  2020â€“2021</text>
+              </svg>
+            </div>
+          </div>
+          <div class="proj-thumb-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="proj-info">
+          <div class="proj-num">Project 03</div>
+          <h3 class="proj-title">Freelance<br>Digital</h3>
+          <div class="proj-cat-row">
+            <span class="proj-cat">Branding / Social</span>
+            <span class="proj-sep" aria-hidden="true"></span>
+            <span class="proj-year">2020 â€” 2021</span>
+          </div>
+          <p class="proj-summary">Graphic and digital design across client verticals â€” social media content, brand identities, and marketing collateral. Managed end-to-end client relationships from brief to final delivery.</p>
+          <div class="proj-tech" aria-label="Tools used">
+            <span class="tech-tag">Photoshop</span>
+            <span class="tech-tag">Illustrator</span>
+            <span class="tech-tag">Figma</span>
+            <span class="tech-tag">Social Design</span>
+          </div>
+          <a href="#case-study" class="proj-cta">View Case Study <span class="arr" aria-hidden="true">â†—</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 3 â€” CASE STUDY PREVIEW
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="case-study" aria-labelledby="cs-h">
+  <div class="container">
+    <div class="cs-header sr">
+      <p class="label" data-num="02">Deep Dive</p>
+      <h2 id="cs-h" class="display">Case Study<br><em>Breakdown</em></h2>
+    </div>
+
+    <!-- Case study: Swipewire -->
+    <div class="cs-block sr" id="cs-swipewire">
+      <div class="cs-left">
+        <div class="cs-role">Lead UX Designer</div>
+        <h3 class="cs-project-name">Swipewire<br>Fintech App</h3>
+        <div class="cs-period">2022 â€” Present</div>
+      </div>
+      <div>
+        <div class="cs-right">
+          <div class="cs-pillar sr d1">
+            <div class="cs-pillar-icon" aria-hidden="true">â—Ž</div>
+            <h4 class="cs-pillar-head">Challenge</h4>
+            <p class="cs-pillar-body">Users were abandoning complex transaction flows due to poor information hierarchy and inconsistent UI patterns across the platform.</p>
+          </div>
+          <div class="cs-pillar sr d2">
+            <div class="cs-pillar-icon" aria-hidden="true">â—ˆ</div>
+            <h4 class="cs-pillar-head">Process</h4>
+            <p class="cs-pillar-body">Conducted 12 user interviews, competitive audits, and heuristic evaluations. Mapped end-to-end journeys and redesigned core flows iteratively.</p>
+          </div>
+          <div class="cs-pillar sr d3">
+            <div class="cs-pillar-icon" aria-hidden="true">â—‡</div>
+            <h4 class="cs-pillar-head">Solution</h4>
+            <p class="cs-pillar-body">Unified design system, streamlined 5-step transaction flows to 2, introduced progressive disclosure and contextual tooltips.</p>
+          </div>
+        </div>
+        <div class="cs-metrics">
+          <div class="cs-metric sr d1">
+            <div class="cs-metric-val">40<span>%</span></div>
+            <div class="cs-metric-lbl">Drop in task abandonment</div>
+          </div>
+          <div class="cs-metric sr d2">
+            <div class="cs-metric-val">2.3<span>Ã—</span></div>
+            <div class="cs-metric-lbl">Faster transaction completion</div>
+          </div>
+          <div class="cs-metric sr d3">
+            <div class="cs-metric-val">92<span>%</span></div>
+            <div class="cs-metric-lbl">User satisfaction score</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case study: Alo Groups -->
+    <div class="cs-block sr" id="cs-alo">
+      <div class="cs-left">
+        <div class="cs-role">Graphic & UI/UX Designer</div>
+        <h3 class="cs-project-name">Alo Groups<br>Design System</h3>
+        <div class="cs-period">2021 â€” 2022</div>
+      </div>
+      <div>
+        <div class="cs-right">
+          <div class="cs-pillar sr d1">
+            <div class="cs-pillar-icon" aria-hidden="true">â—Ž</div>
+            <h4 class="cs-pillar-head">Challenge</h4>
+            <p class="cs-pillar-body">Fragmented UI across mobile and web products â€” inconsistent brand expression, no shared component library, slow design-to-dev handoff.</p>
+          </div>
+          <div class="cs-pillar sr d2">
+            <div class="cs-pillar-icon" aria-hidden="true">â—ˆ</div>
+            <h4 class="cs-pillar-head">Process</h4>
+            <p class="cs-pillar-body">Audited 300+ existing screens, established visual foundations (color, type, spacing), built a Figma component library and documentation.</p>
+          </div>
+          <div class="cs-pillar sr d3">
+            <div class="cs-pillar-icon" aria-hidden="true">â—‡</div>
+            <h4 class="cs-pillar-head">Solution</h4>
+            <p class="cs-pillar-body">Unified design system with 80+ components, reducing new screen design time by 60% and eliminating brand inconsistencies across platforms.</p>
+          </div>
+        </div>
+        <div class="cs-metrics">
+          <div class="cs-metric sr d1">
+            <div class="cs-metric-val">60<span>%</span></div>
+            <div class="cs-metric-lbl">Faster design velocity</div>
+          </div>
+          <div class="cs-metric sr d2">
+            <div class="cs-metric-val">80<span>+</span></div>
+            <div class="cs-metric-lbl">Shared components built</div>
+          </div>
+          <div class="cs-metric sr d3">
+            <div class="cs-metric-val">3<span>Ã—</span></div>
+            <div class="cs-metric-lbl">Faster dev handoff</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 4 â€” VISUAL GALLERY
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="visual-gallery" aria-labelledby="gallery-h">
+  <div class="container">
+    <div class="gallery-header sr">
+      <p class="label" data-num="03">Visual Gallery</p>
+      <h2 id="gallery-h" class="display">Design<br><em>Artefacts</em></h2>
+    </div>
+    <div class="gallery-masonry" role="list" aria-label="Design gallery">
+
+      <div class="gallery-item gi-1 sr d1" role="listitem" tabindex="0" aria-label="Fintech dashboard UI">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 400 480" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="480" fill="#06080f"/>
+            <rect width="400" height="480" fill="url(#pg1)" opacity=".7"/>
+            <rect x="20" y="24" width="360" height="28" rx="4" fill="rgba(201,169,110,0.08)"/>
+            <rect x="20" y="68" width="170" height="100" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(201,169,110,0.12)" stroke-width="1"/>
+            <rect x="206" y="68" width="174" height="100" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <rect x="20" y="184" width="360" height="180" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <polyline points="40,320 90,280 140,300 190,250 240,265 290,225 330,240" stroke="rgba(201,169,110,0.5)" stroke-width="2" fill="none"/>
+            <rect x="20" y="380" width="360" height="60" rx="4" fill="rgba(255,255,255,0.02)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Dashboard UI</div>
+      </div>
+
+      <div class="gallery-item gi-2 sr d2" role="listitem" tabindex="0" aria-label="Mobile app screens">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="240" fill="#060810"/>
+            <rect x="30" y="20" width="90" height="200" rx="10" fill="rgba(110,140,201,0.1)" stroke="rgba(110,140,201,0.2)" stroke-width="1"/>
+            <rect x="140" y="40" width="90" height="160" rx="10" fill="rgba(110,140,201,0.06)" stroke="rgba(110,140,201,0.12)" stroke-width="1"/>
+            <rect x="44" y="48" width="62" height="40" rx="4" fill="rgba(255,255,255,0.06)"/>
+            <rect x="44" y="100" width="62" height="8" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="44" y="114" width="50" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+            <rect x="44" y="144" width="62" height="24" rx="3" fill="rgba(110,140,201,0.25)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Mobile Screens</div>
+      </div>
+
+      <div class="gallery-item gi-3 sr d3" role="listitem" tabindex="0" aria-label="Color system">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid slice">
+            <rect width="240" height="240" fill="#090604"/>
+            <circle cx="120" cy="120" r="80" fill="none" stroke="rgba(201,169,110,0.15)" stroke-width="1"/>
+            <circle cx="120" cy="120" r="50" fill="none" stroke="rgba(201,169,110,0.1)" stroke-width="1"/>
+            <circle cx="120" cy="120" r="20" fill="rgba(201,169,110,0.12)"/>
+            <circle cx="120" cy="40" r="10" fill="rgba(201,169,110,0.5)"/>
+            <circle cx="185" cy="157" r="8" fill="rgba(201,169,110,0.35)"/>
+            <circle cx="55" cy="157" r="8" fill="rgba(201,169,110,0.25)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Color System</div>
+      </div>
+
+      <div class="gallery-item gi-4 sr d2" role="listitem" tabindex="0" aria-label="Wireframes">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid slice">
+            <rect width="300" height="240" fill="#080806"/>
+            <rect x="20" y="20" width="260" height="200" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <rect x="20" y="20" width="260" height="36" fill="rgba(255,255,255,0.03)"/>
+            <rect x="20" y="72" width="120" height="80" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <rect x="156" y="72" width="124" height="38" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <rect x="156" y="116" width="124" height="36" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <rect x="20" y="168" width="260" height="36" fill="rgba(201,169,110,0.08)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Wireframes</div>
+      </div>
+
+      <div class="gallery-item gi-5 sr d3" role="listitem" tabindex="0" aria-label="Typography system">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid slice">
+            <rect width="240" height="240" fill="#070507"/>
+            <text x="20" y="80" font-family="serif" font-size="52" fill="rgba(255,255,255,0.08)" font-style="italic">Ag</text>
+            <rect x="20" y="100" width="80" height="3" rx="1" fill="rgba(201,169,110,0.4)"/>
+            <rect x="20" y="116" width="120" height="6" rx="2" fill="rgba(255,255,255,0.08)"/>
+            <rect x="20" y="130" width="100" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+            <rect x="20" y="144" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+            <rect x="20" y="170" width="60" height="14" rx="2" fill="rgba(201,169,110,0.15)"/>
+            <rect x="90" y="170" width="60" height="14" rx="2" fill="rgba(255,255,255,0.05)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Type System</div>
+      </div>
+
+      <div class="gallery-item gi-6 sr d1" role="listitem" tabindex="0" aria-label="Landing page design">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 560 360" preserveAspectRatio="xMidYMid slice">
+            <rect width="560" height="360" fill="#050402"/>
+            <rect width="560" height="360" fill="url(#pg3)" opacity=".8"/>
+            <rect x="0" y="0" width="560" height="52" fill="rgba(255,255,255,0.025)"/>
+            <rect x="24" y="80" width="280" height="20" rx="3" fill="rgba(255,255,255,0.12)"/>
+            <rect x="24" y="112" width="220" height="12" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="24" y="132" width="240" height="12" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="24" y="164" width="100" height="36" rx="2" fill="rgba(201,169,110,0.25)"/>
+            <rect x="136" y="164" width="100" height="36" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <rect x="300" y="60" width="236" height="260" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(201,169,110,0.12)" stroke-width="1"/>
+            <line x1="0" y1="340" x2="560" y2="340" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Landing Page</div>
+      </div>
+
+      <div class="gallery-item gi-7 sr d2" role="listitem" tabindex="0" aria-label="Component library">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 240 360" preserveAspectRatio="xMidYMid slice">
+            <rect width="240" height="360" fill="#070608"/>
+            <rect x="16" y="20" width="208" height="36" rx="4" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <rect x="16" y="64" width="208" height="36" rx="4" fill="rgba(201,169,110,0.15)"/>
+            <rect x="16" y="108" width="100" height="36" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <rect x="124" y="108" width="100" height="36" rx="4" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <rect x="16" y="156" width="208" height="1" fill="rgba(255,255,255,0.06)"/>
+            <circle cx="36" cy="192" r="12" fill="rgba(201,169,110,0.2)"/>
+            <rect x="60" y="186" width="120" height="8" rx="2" fill="rgba(255,255,255,0.08)"/>
+            <rect x="60" y="200" width="80" height="6" rx="2" fill="rgba(255,255,255,0.04)"/>
+            <circle cx="36" cy="232" r="12" fill="rgba(255,255,255,0.06)"/>
+            <rect x="60" y="226" width="100" height="8" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="60" y="240" width="70" height="6" rx="2" fill="rgba(255,255,255,0.04)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Components</div>
+      </div>
+
+      <div class="gallery-item gi-8 sr d3" role="listitem" tabindex="0" aria-label="Brand identity">
+        <div class="gi-inner">
+          <svg width="100%" height="100%" viewBox="0 0 160 360" preserveAspectRatio="xMidYMid slice">
+            <rect width="160" height="360" fill="#060504"/>
+            <circle cx="80" cy="140" r="60" fill="none" stroke="rgba(201,169,110,0.2)" stroke-width="1.5"/>
+            <circle cx="80" cy="140" r="36" fill="none" stroke="rgba(201,169,110,0.12)" stroke-width="1"/>
+            <circle cx="80" cy="140" r="12" fill="rgba(201,169,110,0.25)"/>
+            <rect x="24" y="240" width="112" height="8" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="36" y="256" width="88" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+            <rect x="32" y="280" width="96" height="28" rx="2" fill="rgba(201,169,110,0.15)"/>
+          </svg>
+        </div>
+        <div class="gi-overlay" aria-hidden="true"></div>
+        <div class="gi-label">Brand Identity</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 5 â€” PROCESS / WORKFLOW
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="process" aria-labelledby="process-h">
+  <div class="container">
+    <div class="process-header sr">
+      <p class="label" data-num="04">How I Work</p>
+      <h2 id="process-h" class="display">Design<br><em>Process</em></h2>
+    </div>
+    <div class="process-track">
+      <div class="process-step sr d1">
+        <div class="ps-num">01</div>
+        <div class="ps-icon" aria-hidden="true">â—Ž</div>
+        <h3 class="ps-title">Discovery</h3>
+        <p class="ps-body">Immersive stakeholder interviews, business goal alignment, and competitive landscape analysis to establish the foundation.</p>
+      </div>
+      <div class="process-step sr d2">
+        <div class="ps-num">02</div>
+        <div class="ps-icon" aria-hidden="true">â—ˆ</div>
+        <h3 class="ps-title">Research</h3>
+        <p class="ps-body">User interviews, surveys, and behavioural analysis to build deep empathy maps and reveal latent needs.</p>
+      </div>
+      <div class="process-step sr d3">
+        <div class="ps-num">03</div>
+        <div class="ps-icon" aria-hidden="true">â—‡</div>
+        <h3 class="ps-title">Strategy</h3>
+        <p class="ps-body">Define problem statements, opportunity spaces, and success metrics before a single wireframe is drawn.</p>
+      </div>
+      <div class="process-step sr d4">
+        <div class="ps-num">04</div>
+        <div class="ps-icon" aria-hidden="true">â—‹</div>
+        <h3 class="ps-title">Wireframing</h3>
+        <p class="ps-body">Low-fidelity structures that rapidly explore information architecture and interaction flows without visual distraction.</p>
+      </div>
+    </div>
+    <div class="process-track-2">
+      <div class="process-step sr d1">
+        <div class="ps-num">05</div>
+        <div class="ps-icon" aria-hidden="true">â–£</div>
+        <h3 class="ps-title">UI Design</h3>
+        <p class="ps-body">High-fidelity pixel-perfect interfaces built on systematic design tokens â€” colour, type, spacing, motion.</p>
+      </div>
+      <div class="process-step sr d2">
+        <div class="ps-num">06</div>
+        <div class="ps-icon" aria-hidden="true">â–·</div>
+        <h3 class="ps-title">Prototyping</h3>
+        <p class="ps-body">Interactive prototypes at varying fidelity â€” from paper to Figma â€” enabling rapid concept validation.</p>
+      </div>
+      <div class="process-step sr d3">
+        <div class="ps-num">07</div>
+        <div class="ps-icon" aria-hidden="true">â—‘</div>
+        <h3 class="ps-title">Testing</h3>
+        <p class="ps-body">Moderated usability sessions, A/B testing, and accessibility audits. Iterate until confidence is earned, not assumed.</p>
+      </div>
+      <div class="process-step sr d4">
+        <div class="ps-num">08</div>
+        <div class="ps-icon" aria-hidden="true">â—</div>
+        <h3 class="ps-title">Handoff</h3>
+        <p class="ps-body">Developer-ready Figma files, annotated specs, motion guidelines, and post-launch support for smooth implementation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 6 â€” TESTIMONIAL / IMPACT
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="testimonial" aria-labelledby="testimonial-h">
+  <div class="container">
+    <div class="sr" style="margin-bottom:clamp(48px,6vw,80px)">
+      <p class="label" data-num="05">Client Impact</p>
+      <h2 id="testimonial-h" class="display" style="font-size:clamp(44px,6vw,96px)">Results &amp;<br><em>Recognition</em></h2>
+    </div>
+    <div class="testimonial-inner">
+      <div class="testimonial-quote-side sr d1">
+        <div>
+          <div class="t-quote-mark" aria-hidden="true">"</div>
+          <p class="t-quote-text">Ajay brought a level of craft and strategic thinking that elevated our product far beyond what we imagined. His ability to translate complex user needs into elegant, intuitive interfaces is genuinely rare.</p>
+        </div>
+        <div class="t-quote-attr">
+          <span class="t-quote-name">Product Lead</span>
+          <span class="t-quote-role">Swipewire Technologies</span>
+        </div>
+      </div>
+      <div class="testimonial-metrics-side">
+        <div class="t-metric sr d2">
+          <div class="t-metric-val">40<span>%</span></div>
+          <div class="t-metric-lbl">Reduction in user drop-off</div>
+        </div>
+        <div class="t-metric sr d3">
+          <div class="t-metric-val">92<span>%</span></div>
+          <div class="t-metric-lbl">Satisfaction score</div>
+        </div>
+        <div class="t-metric sr d2">
+          <div class="t-metric-val">60<span>%</span></div>
+          <div class="t-metric-lbl">Faster design velocity</div>
+        </div>
+        <div class="t-metric sr d3">
+          <div class="t-metric-val">30<span>+</span></div>
+          <div class="t-metric-lbl">Projects delivered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     SECTION 7 â€” CONTACT CTA
+     â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section id="work-cta" aria-label="Start a project">
+  <div class="container">
+    <div class="work-cta-inner">
+      <p class="label sr" data-num="06">Next Step</p>
+      <h2 class="work-cta-h sr d1">
+        Let's Build<br>Something<br><em>Exceptional</em>
+      </h2>
+      <p class="work-cta-sub sr d2">Have a product challenge worth solving? I'd love to hear about it.</p>
+      <div class="avail-badge sr d2" role="status" aria-label="Currently available">
+        <span class="avail-dot" aria-hidden="true"></span>
+        Available for new projects â€” 2025
+      </div>
+      <div class="btn-group sr d3">
+        <a href="mailto:ajayalexander.a@gmail.com" class="btn-primary" aria-label="Email Ajay to start a project">
+          <span>Start a Project</span><span class="arr" aria-hidden="true">â†—</span>
+        </a>
+        <a href="about.html" class="btn-secondary" aria-label="Learn more about Ajay">
+          <span>About Me</span><span aria-hidden="true">â†’</span>
+        </a>
+      </div>
+      <nav class="work-cta-social sr d4" aria-label="Social links">
+        <a href="#" aria-label="Twitter">Twitter / X</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="Dribbble">Dribbble</a>
+        <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="GitHub">GitHub</a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-left">Â© 2025 Ajay Alexander. All rights reserved.</span>
+      <span class="footer-center">Strategy Â· Craft Â· Impact.</span>
+      <a href="#" class="back-top" aria-label="Back to top">Back to Top â†‘</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* â”€â”€ NAV SCROLL â”€â”€ */
+const nav = document.getElementById('site-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 64);
+}, { passive: true });
+
+/* â”€â”€ MOBILE NAV â”€â”€ */
+const hamburger = document.getElementById('hamburger-btn');
+const mobileNav = document.getElementById('mobile-nav');
+let navOpen = false;
+function openNav(){
+  navOpen=true;mobileNav.hidden=false;document.body.classList.add('nav-open');
+  hamburger.setAttribute('aria-expanded','true');
+  hamburger.setAttribute('aria-label','Close navigation');
+  requestAnimationFrame(()=>mobileNav.classList.add('open'));
+  mobileNav.querySelectorAll('a')[0]?.focus();
+}
+function closeNav(){
+  navOpen=false;mobileNav.classList.remove('open');document.body.classList.remove('nav-open');
+  hamburger.setAttribute('aria-expanded','false');
+  hamburger.setAttribute('aria-label','Open navigation');
+  hamburger.focus();
+  mobileNav.addEventListener('transitionend',()=>{if(!navOpen)mobileNav.hidden=true},{once:true});
+}
+hamburger.addEventListener('click',()=>navOpen?closeNav():openNav());
+mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeNav));
+mobileNav.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeNav();
+  if(e.key==='Tab'){
+    const f=[...mobileNav.querySelectorAll('a,button')].filter(el=>!el.hidden);
+    const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }
+});
+
+/* â”€â”€ SCROLL REVEAL â”€â”€ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.sr,.sr-left,.sr-right').forEach(el=>io.observe(el));
+
+/* â”€â”€ CASE STUDY BORDER ANIMATION â”€â”€ */
+const csIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible-cs');csIO.unobserve(e.target);}
+  });
+},{threshold:0.15});
+document.querySelectorAll('.cs-block').forEach(el=>csIO.observe(el));
+
+/* â”€â”€ FILTER BUTTONS â”€â”€ */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const projBlocks = document.querySelectorAll('.proj-block');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false');});
+    btn.classList.add('active');btn.setAttribute('aria-pressed','true');
+    const filter=btn.dataset.filter;
+    projBlocks.forEach(proj=>{
+      const cats=proj.dataset.category||'';
+      const show=filter==='all'||cats.includes(filter);
+      proj.style.transition='opacity 400ms, transform 400ms';
+      proj.style.opacity=show?'1':'0.25';
+      proj.style.transform=show?'none':'scale(0.98)';
+    });
+  });
+});
+
+/* â”€â”€ SMOOTH SCROLL â”€â”€ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#'){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});return;}
+    const t=document.querySelector(href);
+    if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-20,behavior:'smooth'});}
+  });
+});
+
+/* â”€â”€ REDUCED MOTION â”€â”€ */
+if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.querySelectorAll('[class*="sr"]').forEach(el=>{el.style.opacity='1';el.style.transform='none';});
+}
+</script>
+</body>
+</html>
+
+
+
